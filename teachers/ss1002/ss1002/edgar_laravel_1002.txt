@@ -1,0 +1,60 @@
+php -v
+composer
+pwd
+ls
+cd c:
+cd xampp
+cd htdocs
+mkdir laravel
+cd laravel
+composer create-project laravel/laravel example-app1
+
+https://github.com/chengkk0910/laravel202110
+vscode 左下輪子 設定 右上角 開啟設定
+貼上json
+
+Path Intellisense
+format html in php
+php cs fixer
+Laravel Blade formatter
+
+
+test.blade.php
+Emmet Documentation Cheat Sheet
+
+ctrl + L ==> windows cls 清空畫面
+php artisan
+
+php artisan migrate
+
+route
+name
+blade route()
+blade dd()
+
+php artisan make:controller PhotoController --resource
+php artisan make:controller TestController --resource
+App\Http\Controller
+
+use App\Http\Controllers\PhotoController;
+Route::resource('photos', PhotoController::class);
+
+//web.php
+use App\Http\Controllers\TestController;
+Route::resource('tests', TestController::class);
+//chrome
+//localhost/tests
+
+//TestController.php
+//function index
+//return "hello TestController index"
+
+// php artisan route:list
+
+
+resources
+views
+welcome.blade.php 首頁
+
+
+
