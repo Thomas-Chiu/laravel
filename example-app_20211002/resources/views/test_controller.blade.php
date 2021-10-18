@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <h1>photo_page</h1>
+  <h1>test_controller_page</h1>
   <table border="1px" width="80%">
     <tr>
       <td>name</td>
