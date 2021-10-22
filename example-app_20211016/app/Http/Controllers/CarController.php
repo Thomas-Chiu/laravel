@@ -6,83 +6,65 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // return ("我是 CarController.index");
-        // 導向 views/cars/index 畫面
-        // 可用 with() 將變數丟到前端 views
-        $data = 123;
-        return view('car.index')->with("data", $data);
-    }
+  public function index()
+  {
+    // 可用 with() 將變數丟到前端 views
+    $data = "我是 CarController 的 data";
+    return view('car.index')->with("data", $data);
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return ("我是 CarController.create");
-    }
+  public function create()
+  {
+    return ("我是 CarController.create");
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function store(Request $request)
+  {
+    //
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return ("我是 CarController.show: $id");
-    }
+  public function show($id)
+  {
+    if ($id >= 1 && $id <= 9) return view('car.show')->with('id', $id);
+    else return "$id 錯誤，請輸入數字 1 ~ 9";
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return ("我是 CarController.edit: $id");
-    }
+  public function edit($id)
+  {
+    return ("我是 CarController.edit: $id");
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+  public function update(Request $request, $id)
+  {
+    //
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+  public function destroy($id)
+  {
+    //
+  }
+
+  /*
+    增加自定義方法
+  */
+  public function multiplicationTable()
+  {
+    for ($i = 1; $i <= 9; $i++) {
+      for ($j = 1; $j <= 9; $j++) {
+        echo "$i x $j &nbsp;";
+      }
+      echo "<br>";
     }
+  }
+
+  public function tableData()
+  {
+    $data = [
+      ['id' => "s01", "name" => "amy"],
+      ['id' => "s02", "name" => "bob"],
+      ['id' => "s03", "name" => "cat"],
+    ];
+    // dd($data);
+    return view("car.table")->with('data', $data);
+  }
 }

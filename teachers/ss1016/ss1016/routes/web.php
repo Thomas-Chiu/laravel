@@ -31,13 +31,13 @@ Route::get('/single123', [SingleController::class, 'single123']);
 // dev_page1 and dev_page 都有a tag 可以回dev page
 // rounting prefix
 Route::prefix('dev')->name('dev.')->group(function () {
-    Route::get('/dev_page1', function () {
-        return view('dev.dev_page1');
-    })->name('dev_page1_name');
+  Route::get('/dev_page1', function () {
+    return view('dev.dev_page1');
+  })->name('dev_page1_name');
 
-    Route::get('/dev_page2', function () {
-        return view('dev.dev_page2');
-    })->name('dev_page2_name');
+  Route::get('/dev_page2', function () {
+    return view('dev.dev_page2');
+  })->name('dev_page2_name');
 });
 
 /*
@@ -71,7 +71,7 @@ Route::prefix('dev')->name('dev.')->group(function () {
 // hello 55688 kai :))
 
 Route::get('/user/{id}/name/{name}', function ($id, $name) {
-    return "hello $id $name";
+  return "hello $id $name";
 });
 
 //練習 2
@@ -105,15 +105,15 @@ Route::get('/user/{id}/name/{name}', function ($id, $name) {
  *員工
  */
 Route::get('/front', function () {
-    return view('car.front');
+  return view('car.front');
 })->name('front_name');
 
 Route::get('/page1', function () {
-    return view('car.page1');
+  return view('car.page1');
 })->name('page1_name');
 
 Route::get('/page2', function () {
-    return view('car.page2');
+  return view('car.page2');
 })->name('page2_name');
 
 //page1 page2  a tag back front
@@ -126,15 +126,15 @@ Route::resource('cars', CarController::class);
 Route::resource('photos', PhotoController::class);
 
 Route::get('/', function () {
-    
-    $url = route('dev.dev_page1_name');
-    echo $url."<br>";
-    echo $url."<br>";
-    echo $url."<br>";
-    echo $url."<br>";
-    dd($url);
-    
-    //return view('welcome');
+
+  $url = route('dev.dev_page1_name');
+  echo $url . "<br>";
+  echo $url . "<br>";
+  echo $url . "<br>";
+  echo $url . "<br>";
+  dd($url);
+
+  //return view('welcome');
 });
 
 

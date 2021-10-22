@@ -9,7 +9,10 @@ Route::get('/', function () {
   $url = route("abc.dev_page1");
   echo $url . "<br>";
   echo $url . "<br>";
-  // dd() 可當斷點 debug 用
+  /* 
+    dd() 可當斷點 debug 用
+    不會執行下方程式碼 
+  */
   dd($url);
   echo $url . "<br>";
   echo $url . "<br>";
@@ -66,10 +69,8 @@ Route::prefix("dev")->name("abc.")->group(function () {
 Route::get('/single', SingleController::class);
 Route::get('/single2', [SingleController::class, "test"]);
 
-// 練習 1: 建立 controller CarController 
-// 再從 CarController 導向 views 畫面
-Route::resource('cars', CarController::class);
-Route::resource('photos', PhotoController::class);
 
 // 練習 7: 用 URL 方式導向 CarController 的 method
-// Resource Controllers, index, create, show, edit
+Route::get('/car_multiplication', [CarController::class, 'multiplicationTable']);
+Route::get('/car_table', [CarController::class, 'tableData']);
+Route::resource('cars', CarController::class);
