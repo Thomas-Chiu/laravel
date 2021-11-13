@@ -54,7 +54,7 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
   </div>
 
   <div class="center">
-    <a href="">回首頁</a>
+    <a href="{{ route('students.index') }}">回首頁</a>
   </div>
   <br>
 
@@ -71,12 +71,13 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
         <th>國文</th>
         <th>英文</th>
         <th>數學</th>
+        <th>地點</th>
         <th>電話</th>
       </tr>
 
-      {{-- @php
-        dd($data->all()->toArray());
-      @endphp --}}
+      @php
+        // dd($data, $dataPhone, $dataLocation);
+      @endphp
 
       <tr>
         <td>{{ $data['id'] }}</td>
@@ -84,12 +85,14 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
         <td><input type="number" name="chinese" id="chinese" value="{{ $data['chinese'] }}"></td>
         <td><input type="number" name="english" id="english" value="{{ $data['english'] }}"></td>
         <td><input type="number" name="math" id="math" value="{{ $data['math'] }}"></td>
-        <td><input type="text" name="phone" id="phone" value="{{ $data['phone'] }}"></td>
+        <td><input type="text" name="location" id="location" value="{{ $dataLocation->location->location_name }}">
+        </td>
+        <td><input type="text" name="phone" id="phone" value="{{ $dataPhone->phoneRelation->phone }}"></td>
       </tr>
 
 
       <tr>
-        <td colspan="6">
+        <td colspan="7">
           <div id="example1">
             <p>
               <input type="hidden" name="id" value="<?= $data['id'] ?>">

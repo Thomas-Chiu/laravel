@@ -16,4 +16,19 @@ class Student extends Model
     'english',
     'math',
   ];
+
+  /*
+   * Get the phone associated with the user.
+   */
+  public function phoneRelation()
+  {
+    // 綁定外鍵 foreign key
+    return $this->hasOne(Phone::class, "student_id");
+  }
+
+  public function location()
+  {
+    // 綁定外鍵 foreign key
+    return $this->hasOne(Location::class, "student_id");
+  }
 }

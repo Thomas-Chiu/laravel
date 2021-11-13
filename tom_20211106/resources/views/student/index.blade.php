@@ -26,8 +26,6 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
       text-align: center;
     }
 
-
-
     #example1 {
       border: 2px solid grey;
       border-radius: 25px;
@@ -67,9 +65,10 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
   </div>
   <br>
 
-  {{-- @php
-    dd($data, $data2, $data3, $data4);
-  @endphp --}}
+  @php
+    // dd($data, $data2, $data3, $data4);
+    // dd($dataRelation);
+  @endphp
 
   <table class="center" border="1px" width="80%">
     <tr>
@@ -79,43 +78,42 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
       <th>英文</th>
       <th>數學</th>
       <th>電話</th>
+      <th>位置</th>
       <th>修改/刪除</th>
-
     </tr>
 
-    {{-- <tr>
-      <td>id</td>
-      <td>name</td>
-      <td>chinese</td>
-      <td>english</td>
-      <td>math</td>
-      <td>phone</td>
-      <td>
-        <form action="" method="post">
-          <a href="" class="btn btn-info btn-sm" role="button">修改</a>
-          <input type="submit" value="刪除" name="submit" class="btn btn-danger btn-sm">
-        </form>
-      </td>
-    </tr> --}}
-
     {{-- for --}}
-    @foreach ($data as $item)
+    @foreach ($dataRelation as $key => $value)
       <tr>
-        <td>{{ $item->id }}</td>
-        <td>{{ $item->name }}</td>
-        <td>{{ $item->chinese }}</td>
-        <td>{{ $item->english }}</td>
-        <td>{{ $item->math }}</td>
-        <td></td>
-        <td>
-          <form action="" method="post">
-            {{-- 傳入參數 
+        <td>{{ $value->id }}</td>
+        <td>{{ $value->name }}</td>
+        <td>{{ $value->chinese }}</td>
+        <td>{{ $value->english }}</td>
+        <td>{{ $value->math }}</td>
+
+        {{-- ($value->relation function->column name) --}}
+        @if (!empty($value->phoneRelation->phone))
+          <td>{{ $value->phoneRelation->phone }}</td>
+        @else
+          <td>無資料</td>
+        @endif
+
+        @if (!empty($value->location->location_name))
+          <td>{{ $value->location->location_name }}</td>
+        @else
+          <td>無資料</td>
+        @endif
+
+        {{-- 傳入參數 
               route("name", "params")
               route("x", [1, 2, 3])
               route("x", ["key1" => "value1", "key2" => "value2"]) --}}
-
-            <a href="{{ route('students.edit', ['student' => $item->id]) }}" class="btn btn-info btn-sm"
-              role="button">修改</a>
+        <td>
+          <a href="{{ route('students.edit', ['student' => $value->id]) }}" class="btn btn-info btn-sm"
+            role="button">修改</a>
+          <form action="{{ route('students.destroy', ['student' => $value->id]) }}" method="post">
+            @csrf
+            @method("DELETE")
             <input type="submit" value="刪除" name="submit" class="btn btn-danger btn-sm">
           </form>
         </td>
