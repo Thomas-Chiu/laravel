@@ -1,0 +1,179 @@
+======================================
+2021-11-13
+======================================
+哪些要大寫 哪些小寫
+
+大寫
+Controller / Model
+
+小寫複數
+web.php Route::resource('students', StudentController::class);
+
+index.blade
+route('students.index');
+route('students.create');
+route('students.edit');
+
+
+小寫單數
+controller
+return view("student.index")->with('data', $data);
+
+view
+folder student/index.blade.php
+
+model function (relation)
+
+
+======================================
+phone
+cotroller
+model -m
+db
+
+php artisan make:controller PhoneController --resource
+php artisan make:model Phone --migration
+
+php artisan make:controller LocationController --resource
+php artisan make:model Location --migration
+
+綁定
+Student Model
+public function locationRelation()
+{
+    return $this->hasOne(Location::class);
+}
+
+Location Model
+public function studentRelation()
+{
+    return $this->hasOne(Student::class);
+}
+
+
+綁定
+class Student extends Model
+/**
+* Get the phone associated with the user.
+*/
+public function phone()
+{
+return $this->hasOne(Phone::class,'外鍵');
+}
+
+class Phone extends Model
+{
+public function student()
+{
+    return $this->belongsTo(Student::class,'外鍵');
+}
+
+使用
+student controller
+use App\Models\Student;
+use App\Models\Phone;
+
+public function index()
+{
+    // with後relations model 可自訂function phone123 
+    $data = Student::with('phone')->get();    
+    dd($data);
+
+public function store(Request $request)
+{
+    $input = $request->except("_token");
+    
+    $data = new Student;
+
+    $data->name = $input['name'];
+    $data->chinese = $input['chinese'];
+    $data->english = $input['english'];
+    $data->math = $input['math'];
+    $data->save();
+
+    $dataPhone = new Phone;
+    $dataPhone->student_id = $data['id'];
+    $dataPhone->phone = $input['phone'];
+    $dataPhone->save();
+    return redirect()->route('students.index');
+======================================
+student delete
+
+index blade
+<form action="{{route('students.destroy', ['student' => $value->id ])}}" method="post">
+    @csrf 
+    @method('DELETE')                         
+    {{-- <input type="hidden" name="_token" value=""> --}}
+    {{-- <input type="hidden" name="_method" value="DELETE"> --}}
+<input type="submit" value="刪除" name="submit" class="btn btn-danger btn-sm">
+</form>
+
+student controller
+public function destroy(Request $request,$id)
+{
+    // dd($request);
+    // $input = $request->all();
+    // dd($input);
+    // Student::where('id',$id)->delete();
+    // find($id) ==  where('name','amy123')->get()
+    $data = Student::where('name','amy123')->get();
+    dd($data);
+
+    return redirect()->route('students.index');
+}
+
+===============================================
+2021-11-06
+composer create-project laravel/laravel example-app
+composer create-project laravel/laravel ss1106
+
+php artisan make:controller PhotoController --resource
+php artisan make:controller StudentController --resource
+
+
+use App\Http\Controllers\StudentController;
+
+Route::resource('students', StudentController::class);
+
+
+php artisan make:model Flight --migration
+php artisan make:model Student --migration
+
+//StudentController index action/fuction
+use Illuminate\Support\Facades\DB;
+$data = DB::select('select * from students');
+dd($data);
+
+//Convention over Configuration
+//慣例優於設定
+
+//Dont' Repeat Yourself
+//不要重複你自己
+
+
+//edit
+//documentaion controller
+/photos/{photo}/edit
+
+//route
+//The Basics / Routing
+//$url = route('profile', ['id' => 1]);
+
+//route('students.edit', ['student' => 1]);
+
+//edit.blade
+    <form action="{{route('students.update',['student' => $data['id']])}}" method="post">
+       @csrf
+       {{-- <input type="hidden" name="_token" value=""> --}}
+       @method('PUT')
+       {{-- <input type="hidden" name="_method" value="PUT"> --}}
+
+//index.blade
+<td>                
+    <form action="" method="post">                    
+    <a href="{{route('students.edit', ['student' => $value->id ])}}" class="btn btn-info btn-sm" role="button">修改</a>
+    <input type="submit" value="刪除" name="submit" class="btn btn-danger btn-sm">
+    </form>
+</td>
+
+

@@ -1,0 +1,58 @@
+======================================
+2021-10-23
+composer create-project laravel/laravel example-app
+composer create-project laravel/laravel ss1023
+
+php artisan make:controller CarController --resource
+
+blade
+
+BookController
+php artisan make:controller BookController --resource
+
+繼承母版
+@extends('layoutsFolder.app')
+
+第一組
+@yield('title123')
+@section('title123', 'Page Title')
+
+
+母版 layouts/app2
+@title
+@content
+
+子版一 page1
+@title page1
+@content 
+ <h3> page1 
+ <p> test test
+
+子板二 page2
+@title page2
+ <h3> page1 
+ <p> test test
+
+php artisan make:model Flight
+
+php artisan make:model Student --migration
+
+setting migration
+
+ public function up()
+    {
+        Schema::create('students', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('tel');
+            $table->timestamps();
+        });
+    }
+
+      public function down()
+    {
+        Schema::dropIfExists('students');
+    }
+
+
+php artisan migrate
