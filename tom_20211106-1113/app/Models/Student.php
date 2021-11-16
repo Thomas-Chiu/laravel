@@ -9,7 +9,7 @@ class Student extends Model
 {
   use HasFactory;
 
-  // 操作資料庫白名單欄位
+  // 操作資料表白名單欄位
   protected $fillable = [
     'name',
     'chinese',

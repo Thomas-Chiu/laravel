@@ -66,7 +66,7 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
   <br>
 
   @php
-    // dd($data, $data2, $data3, $data4);
+    dd($data, $data2, $data3, $data4);
     // dd($dataRelation);
   @endphp
 
@@ -83,7 +83,8 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
     </tr>
 
     {{-- for --}}
-    @foreach ($dataRelation as $key => $value)
+    @foreach ($data3 as $key => $value)
+      {{-- @foreach ($dataRelation as $key => $value) --}}
       <tr>
         <td>{{ $value->id }}</td>
         <td>{{ $value->name }}</td>

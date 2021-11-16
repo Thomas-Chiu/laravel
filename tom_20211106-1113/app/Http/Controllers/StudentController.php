@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 // 引用 Model
-
 use App\Models\Location;
 use App\Models\Phone;
 use App\Models\Student;
@@ -22,14 +21,17 @@ class StudentController extends Controller
     // Eloquent 寫法 (操作 Model)
     $data3 = Student::all();
     $data4 = Student::where("name", "thomas")->get()->toArray();
-    // 所有 query 最後要用 get() 結束才會取得 Collection 物件
-    // Collection 有很多方法如 toArray() 轉成陣列
+
+    /*
+      所有 query 最後要用 get() 結束才會取得 Collection 物件
+      Collection 有很多方法如 toArray() 轉成陣列
+     */
 
     // 測試一對一關聯
     // $data = Phone::get();
     // dd($data);
 
-    // with(relation model) 綁定 phoneRelation
+    /* with(relation model) 綁定 phoneRelation */
     $dataRelation = Student::with("phoneRelation")->with("location")->get();
 
     return view("student.index")

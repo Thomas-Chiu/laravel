@@ -143,7 +143,7 @@ php artisan make:model Student --migration
 use Illuminate\Support\Facades\DB;
 $data = DB::select('select * from students');
 dd($data);
-
+~
 //Convention over Configuration
 //慣例優於設定
 
