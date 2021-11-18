@@ -21,8 +21,6 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
       text-align: center;
     }
 
-
-
     #example1 {
       border: 2px solid grey;
       border-radius: 25px;
@@ -59,10 +57,10 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
   <br>
 
   <form action="{{ route('students.update', ['student' => $data['id']]) }}" method="post">
-    @csrf
     {{-- 等於 <input type="hidden" name="_token" value=""> --}}
-    @method("PUT")
+    @csrf
     {{-- 等於 <input type="hidden" name="_method" value="PUT"> --}}
+    @method("PUT")
 
     <table class="center" border="1px" width="80%">
       <tr>
@@ -76,7 +74,8 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
       </tr>
 
       @php
-        // dd($data, $dataPhone, $dataLocation);
+        // dd($data, $dataLocation, $dataPhone);
+        dd($dataLocation->location->location_name ?? '');
       @endphp
 
       <tr>
@@ -85,11 +84,11 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
         <td><input type="number" name="chinese" id="chinese" value="{{ $data['chinese'] }}"></td>
         <td><input type="number" name="english" id="english" value="{{ $data['english'] }}"></td>
         <td><input type="number" name="math" id="math" value="{{ $data['math'] }}"></td>
-        <td><input type="text" name="location" id="location" value="{{ $dataLocation->location->location_name }}">
+        {{-- <td><input type="text" name="location" id="location" value="{{ $dataLocation->location->location_name }}"> --}}
         </td>
-        <td><input type="text" name="phone" id="phone" value="{{ $dataPhone->phoneRelation->phone }}"></td>
+        {{-- value="{{ $副資料變數->主資料的 relation 方法->副資料欄位名稱 }}" --}}
+        {{-- <td><input type="text" name="phone" id="phone" value="{{ $dataPhone->phoneRelation->phone }}"></td> --}}
       </tr>
-
 
       <tr>
         <td colspan="7">

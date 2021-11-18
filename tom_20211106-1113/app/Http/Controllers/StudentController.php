@@ -14,36 +14,49 @@ class StudentController extends Controller
 {
   public function index()
   {
-    // 原生寫法 (操作 DB)
-    $data = DB::select("SELECT * FROM students");
-    $data2 = DB::select("SELECT * FROM students WHERE name = 'thomas'");
+    /* 
+      原生寫法 (操作 DB)
+      $data = DB::select("SELECT * FROM students");
+      $data2 = DB::select("SELECT * FROM students WHERE name = 'thomas'");
+     */
 
-    // Eloquent 寫法 (操作 Model)
-    $data3 = Student::all();
-    $data4 = Student::where("name", "thomas")->get()->toArray();
+    /* 
+      Eloquent 寫法 (操作 Model)
+      all()、get() 都可查詢全部
+      $data = Student::all();
+      $data2 = Student::get();
+     */
+
+    /*
+      find($id) === where("id", $id) 
+      $data = Student::where("name", "thomas")->get();
+      $data2 = Student::find(1);
+     */
 
     /*
       所有 query 最後要用 get() 結束才會取得 Collection 物件
       Collection 有很多方法如 toArray() 轉成陣列
+      $data4 = Student::where("name", "thomas")->get()->toArray();
      */
 
-    // 測試一對一關聯
-    // $data = Phone::get();
-    // dd($data);
+    /*
+       測試一對一關聯
+       $data = Phone::get();
+       dd($data)
+     */
 
-    /* with(relation model) 綁定 phoneRelation */
+    // 使用 Model 的 relation 方法
     $dataRelation = Student::with("phoneRelation")->with("location")->get();
 
     return view("student.index")
-      ->with("data", $data)
-      ->with("data2", $data2)
-      ->with("data3", $data3)
-      ->with("data4", $data4)
+      // ->with("data", $data)
+      // ->with("data2", $data2)
       ->with("dataRelation", $dataRelation);
   }
 
   public function create()
   {
+    // 導向新增頁面
     return view("student.create");
   }
 
@@ -75,6 +88,7 @@ class StudentController extends Controller
     $dataLocation->location_name = $input["location"];
     $dataLocation->save();
 
+    // 返回查詢首頁
     return redirect()->route("students.index");
   }
 
@@ -90,6 +104,7 @@ class StudentController extends Controller
     $dataPhone = Phone::where("student_id", $id)->get();
     $dataLocation = Location::where("student_id", $id)->get();
 
+    // 導向編輯頁面
     return view("student.edit")
       ->with("data", $data)
       ->with("dataPhone", $dataPhone)
@@ -131,6 +146,7 @@ class StudentController extends Controller
     echo "DELETE ID: $id";
     // dd($input);
     Student::where("id", $id)->delete();
+
     return redirect()->route("students.index");
   }
 }

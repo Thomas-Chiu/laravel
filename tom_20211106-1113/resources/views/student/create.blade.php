@@ -21,8 +21,6 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
       text-align: center;
     }
 
-
-
     #example1 {
       border: 2px solid grey;
       border-radius: 25px;
@@ -58,6 +56,7 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
   </div>
   <br>
   <form action="{{ route('students.store') }}" method="post">
+    {{-- 前端 POST 需加 @csrf 產生 _token --}}
     @csrf
     <table class="center" border="1px" width="80%">
       <tr>
@@ -68,8 +67,8 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
         <th>數學</th>
         <th>地點</th>
         <th>電話</th>
-
       </tr>
+
       <tr>
         <td>id</td>
         {{-- input 的 name 建議和 data 的 key 一樣 --}}
@@ -81,18 +80,14 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
         <td><input type="text" name="phone" id="phone"></td>
       </tr>
 
-
       <tr>
-
         <td colspan="7">
-
           <div id="example1">
             <p>
               <input type="submit" value="submit" name="submit">
             </p>
           </div>
         </td>
-
       </tr>
     </table>
   </form>

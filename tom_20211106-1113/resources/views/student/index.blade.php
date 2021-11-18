@@ -61,12 +61,11 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
     <a href="{{ route('students.index') }}">回首頁</a>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="{{ route('students.create') }}">單筆新增</a>
-
   </div>
   <br>
 
   @php
-    dd($data, $data2, $data3, $data4);
+    // dd($data, $data2);
     // dd($dataRelation);
   @endphp
 
@@ -79,12 +78,13 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
       <th>數學</th>
       <th>電話</th>
       <th>位置</th>
+      {{-- update/delete --}}
       <th>修改/刪除</th>
     </tr>
 
     {{-- for --}}
-    @foreach ($data3 as $key => $value)
-      {{-- @foreach ($dataRelation as $key => $value) --}}
+    {{-- @foreach ($data2 as $key => $value) --}}
+    @foreach ($dataRelation as $key => $value)
       <tr>
         <td>{{ $value->id }}</td>
         <td>{{ $value->name }}</td>
@@ -123,7 +123,6 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
     {{-- for end --}}
 
     <tr>
-
       <td colspan="7">
         <div id="example1">
           <p>
@@ -131,11 +130,8 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
           </p>
         </div>
       </td>
-
     </tr>
   </table>
-
-  <br><br><br>
 
 </body>
 
