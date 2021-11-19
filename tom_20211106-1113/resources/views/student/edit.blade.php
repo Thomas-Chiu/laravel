@@ -75,7 +75,7 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
 
       @php
         // dd($data, $dataLocation, $dataPhone);
-        dd($dataLocation->location->location_name ?? '');
+        // dd($data->phoneRelation->phone);
       @endphp
 
       <tr>
@@ -84,10 +84,10 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
         <td><input type="number" name="chinese" id="chinese" value="{{ $data['chinese'] }}"></td>
         <td><input type="number" name="english" id="english" value="{{ $data['english'] }}"></td>
         <td><input type="number" name="math" id="math" value="{{ $data['math'] }}"></td>
-        {{-- <td><input type="text" name="location" id="location" value="{{ $dataLocation->location->location_name }}"> --}}
+        <td><input type="text" name="location" id="location" value="{{ $data->location->location_name }}">
         </td>
-        {{-- value="{{ $副資料變數->主資料的 relation 方法->副資料欄位名稱 }}" --}}
-        {{-- <td><input type="text" name="phone" id="phone" value="{{ $dataPhone->phoneRelation->phone }}"></td> --}}
+        {{-- value="{{ $主資料變數->主資料的 relation 方法->副資料欄位名稱 }}" --}}
+        <td><input type="text" name="phone" id="phone" value="{{ $data->phoneRelation->phone }}"></td>
       </tr>
 
       <tr>

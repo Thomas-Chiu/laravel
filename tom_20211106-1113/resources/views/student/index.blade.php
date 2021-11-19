@@ -105,7 +105,7 @@ $strArr = ['By failing to prepare, you are preparing to fail.'];
           <td>無資料</td>
         @endif
 
-        {{-- 傳入參數 
+        {{-- 路由可傳入 URL 參數 
               route("name", "params")
               route("x", [1, 2, 3])
               route("x", ["key1" => "value1", "key2" => "value2"]) --}}
