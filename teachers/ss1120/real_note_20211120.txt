@@ -1,0 +1,117 @@
+======================================
+2021-11-20
+======================================
+======================================
+練習四
+//1.建立 Loves Model (migration) / Cotroller
+//db loves
+//Model Controller Love
+//2.index.blade.php 增加column
+
+php artisan make:controller LoveController --resource
+php artisan make:model Love --migration
+
+//綁定關係
+//model hasMany / belongsTo
+// protected $table = 'loves';
+
+//Student.php
+public function loveRelation()
+{
+    return $this->hasMany(Love::class);
+}
+
+//Love.php
+public function studentRelation()
+{
+    return $this->belongsTo(Student::class);
+}
+
+use App\Http\Controllers\LoveController;
+Route::resource('loves', LoveController::class);
+
+======================================
+php artisan make:migration update_aaa_to_phones
+//migration error
+1.table 不存在
+2.after -> afeexx 可以跑 只是沒有after效果
+3.integer -> integer123
+4.migration sql 對不起來
+5.change() error
+ RuntimeException
+
+  Changing columns for table "phones" requires Doctrine DBAL. Please install the doctrine/dbal
+package.
+
+  at C:\xampp\htdocs\laravel\ss1106\vendor\laravel\framework\src\Illuminate\Database\Schema\Gra
+mmars\ChangeColumn.php:30
+
+//migration
+// up  /  down
+// add /  del (drop column)
+// update / update 前 (change)
+
+
+======================================
+migration error
+//匯出 資料備份
+建新的db
+db_laravel_1106
+db_laravel_1106_test
+vscode
+ctrl + p 
+.env
+DB_DATABASE=db_laravel_1106 改新的
+
+
+//練習三 透過migration 把update phones aaa column comment default('55688')
+
+//練習二 透過migration 把table phones add column aaa 
+如何把它增加到create_at 前 ?
+php artisan make:migration add_aaa_to_phones
+
+//練習一 透過migration 把table phones column test 刪除
+
+php artisan make:migration del_test_to_phones --table="phones"
+
+
+======================================
+migration
+create
+update
+
+php artisan model -m 
+=>2021_11_13_033910_create_phones_table.php
+
+
+
+=>2021_11_20_014732_add_test_to_phones.php
+
+php artisan make:migration add_test222_to_phones
+----------------------------------------------
+//php artisan make:migration add_test_to_phones --table="phones"
+//2021_11_20_014732_add_test_to_phones.php
+
+public function up()
+{
+    Schema::table('phones', function (Blueprint $table) {
+        $table->integer('test');
+    });
+}
+
+public function down()
+{
+    Schema::table('phones', function (Blueprint $table) {
+        $table->dropColumn('test');
+    });
+
+}
+
+php artisan migrate
+
+
+
+
+
+
+
