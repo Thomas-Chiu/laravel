@@ -22,3 +22,4 @@ Route::get('/', function () {
 // 資源控制器在註冊時，URI 就是 route name
 Route::resource("students", StudentController::class);
 Route::resource("phones", PhoneController::class);
+Route::resource("loves", PhoneController::class);
