@@ -1,0 +1,56 @@
+======================================
+2021-12-04
+======================================
+php artisan route:list
+
+php artisan cache:clear
+
+web.php 
+route name 要跟 index route name 要相等
+web.php
+name->('students.create-file')
+index.blade.php
+{{route('students.create-file')}}
+
+StudentController
+public function createFile(){
+    // dd('hello create file :))');
+    return view("file123.create");
+}
+
+---------------------
+file>create.blade.php
+<form action="{{route('students.store-file')}}" method="post" enctype="multipart/form-data">
+
+web.phpget -> post
+
+------------------------
+
+google
+laravel migration add column 
+stackoverflow
+
+php artisan make:migration add_paid_to_users_table --table=users
+php artisan make:migration add_photo_to_students_table --table=students
+
+php artisan migrate
+php artisan migrate:rollback
+
+public function up()
+{
+    Schema::table('students', function (Blueprint $table) {
+        $table->string('photo')->nullable()->after('name');
+    });
+}
+
+/**
+ * Reverse the migrations.
+ *
+ * @return void
+ */
+public function down()
+{
+    Schema::table('students', function (Blueprint $table) {
+        $table->dropColumn('photo');
+    });
+}
