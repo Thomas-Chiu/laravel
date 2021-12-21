@@ -1,0 +1,71 @@
+======================================
+2021-12-19
+======================================
+php artisan make:export UsersExport --model=User
+php artisan make:export StudentsExport --model=Student
+======================================
+php artisan make:seeder UserSeeder
+php artisan make:seeder StudentSeeder
+php artisan make:seeder PhoneSeeder
+php artisan make:seeder LoveSeeder
+
+php artisan db:seed
+
+php artisan db:seed --class=StudentSeeder
+php artisan db:seed --class=PhoneSeeder
+php artisan db:seed --class=LoveSeeder
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
+        $this->call([
+            StudentSeeder::class,
+            PhoneSeeder::class,
+            LoveSeeder::class,
+        ]);
+    }
+}
+
+=======================================
+php artisan make:migration update_photo_to_phones_table --table=phones
+
+copy 檔案的話
+public storage 刪掉
+重新建立soft-link
+php artisan storage:link
+
+//StudentController
+//add 
+//第一個方法 不改資料庫 
+// if (empty($input['phoneInput'])) {
+//     $input['phoneInput'] = "no phone"; //create blade input            
+// }
+
+public function up()
+{
+    Schema::table('phones', function (Blueprint $table) {
+        $table->string('phone')->nullable()->change();
+    });
+}
+
+public function down()
+{
+    Schema::table('phones', function (Blueprint $table) {
+        $table->string('phone')->change();
+    });
+}
+
+
+
+
+
+
+
+
