@@ -1,0 +1,20 @@
+php artisan make:model Entities/Car -m
+
+protected $table = 'cars';
+protected $fillable = [
+    'name',        
+];
+
+php artisan migrate
+
+php artisan make:seeder CarSeeder
+
+php artisan db:seed --class=CarSeeder
+
+php artisan make:controller CarController --resource
+
+web.php
+use App\Http\Controllers\CarController;
+
+CarController.php
+use App\Models\Entities\Car;
