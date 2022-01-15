@@ -1,0 +1,53 @@
+1.schema
+2.php artisan make:controller PhotoController --resource
+3.web.php
+   use App\Http\Controllers\StudentController;
+   Route::resource('students', StudentController::class);
+4.php artisan make:model Student --migration
+   Schema::create('students', function (Blueprint $table) {
+	$table->id();
+	$table->string('name');
+	$table->integer('chinese');
+	$table->integer('english');
+	$table->integer('math');
+	$table->timestamps();
+        });
+5.php artisan migrate / rollback
+6.model
+7.app\Repositories\StudentRepository
+
+
+
+
+=========================
+composer create-project laravel/laravel ss220115
+
+composer require laravel/breeze --dev
+
+.env
+ localhost/phpmyadmin 建db db_laravel_0115
+ DB_DATABASE=db_laravel_0115
+ DB_USERNAME=root
+ DB_PASSWORD=
+
+php artisan migrate
+
+composer install
+node -v
+https://nodejs.org/en/
+node -v
+ reopen git bash
+ google node.js path 
+
+https://docs.npmjs.com/cli/v8/commands/npm-install
+
+npm install
+npm -v
+npm audit fix
+
+npm run dev
+
+php artisan breeze:install
+
+npm install
+npm run dev
